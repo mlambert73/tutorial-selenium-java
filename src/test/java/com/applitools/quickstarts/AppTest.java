@@ -21,6 +21,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class AppTest {
 
 	public static void main(String[] args) {
+		// BaseURL of the website
+		String baseURL = "https://demo.applitools.com";
+		
+		// ⭐️ Note to see visual bugs, run the test using the above URL for the 1st run.
+		// but then change the above URL to https://demo.applitools.com/index_v2.html
+		// (for the 2nd run)
+
 		// Create a new chrome web driver
 		WebDriver webDriver = new ChromeDriver(new ChromeOptions().setHeadless(getCI()));
 
@@ -30,14 +37,10 @@ public class AppTest {
 		// Create Eyes object with the runner, meaning it'll be a Visual Grid eyes.
 		Eyes eyes = new Eyes(runner);
 
-		setUp(eyes);
+		setUp(eyes, true); // setup to run on the Ultrafast Grid
 
 		try {
-			// ⭐️ Note to see visual bugs, run the test using the above URL for the 1st run.
-			// but then change the above URL to https://demo.applitools.com/index_v2.html
-			// (for the 2nd run)
-			ultraFastTest(webDriver, eyes);
-
+			simpleTest(baseURL, webDriver, eyes);
 		} finally {
 			tearDown(webDriver, runner);
 		}
@@ -49,7 +52,7 @@ public class AppTest {
 		return Boolean.parseBoolean(env);
 	}
 
-	public static void setUp(Eyes eyes) {
+	public static void setUp(Eyes eyes, boolean useGrid) {
 
 		// Initialize eyes Configuration
 		Configuration config = new Configuration();
@@ -57,31 +60,37 @@ public class AppTest {
 		// You can get your api key from the Applitools dashboard
 		config.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
 
-		// create a new batch info instance and set it to the configuration
-		config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Ultrafast"));
+		if (useGrid)
+			// create a new batch info instance and set it to the configuration
+			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Ultrafast"));
 
-		// Add browsers with different viewports
-		config.addBrowser(800, 600, BrowserType.CHROME);
-		config.addBrowser(700, 500, BrowserType.FIREFOX);
-		config.addBrowser(1600, 1200, BrowserType.IE_11);
-		config.addBrowser(1024, 768, BrowserType.EDGE_CHROMIUM);
-		config.addBrowser(800, 600, BrowserType.SAFARI);
+			// Add browsers with different viewports
+			config.addBrowser(800, 600, BrowserType.CHROME);
+			config.addBrowser(700, 500, BrowserType.FIREFOX);
+			config.addBrowser(1600, 1200, BrowserType.IE_11);
+			config.addBrowser(1024, 768, BrowserType.EDGE_CHROMIUM);
+			config.addBrowser(800, 600, BrowserType.SAFARI);
 
-		// Add mobile emulation devices in Portrait mode
-		config.addDeviceEmulation(DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
-		config.addDeviceEmulation(DeviceName.Pixel_2, ScreenOrientation.PORTRAIT);
-
+			// Add mobile emulation devices in Portrait mode
+			config.addDeviceEmulation(DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
+			config.addDeviceEmulation(DeviceName.Pixel_2, ScreenOrientation.PORTRAIT);
+		}
+		else {
+			// create a new batch info instance and set it to the configuration
+			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Ultrafast"));
+		}
+		
 		// Set the configuration object to eyes
 		eyes.setConfiguration(config);
 
 	}
 
-	public static void ultraFastTest(WebDriver webDriver, Eyes eyes) {
+	public static void simpleTest(String baseURL, WebDriver webDriver, Eyes eyes) {
 
 		try {
 
 			// Navigate to the url we want to test
-			webDriver.get("https://demo.applitools.com");
+			webDriver.get(baseURL);
 
 			// Call Open on eyes to initialize a test session
 			eyes.open(webDriver, "Demo App - Selenium for Java - Ultrafast", "Smoke Test - Selenium for Java - Ultrafast", new RectangleSize(800, 600));
