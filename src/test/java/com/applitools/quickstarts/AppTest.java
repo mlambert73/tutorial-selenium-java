@@ -33,7 +33,8 @@ public class AppTest {
 		// (for the 2nd run)
 		
 		// Use or not-use the Ultrafast Grid
-		boolean useGrid = false;
+		//boolean useGrid = false;
+		boolean useGrid = true;
 
 		// Create a new chrome web driver
 		WebDriver webDriver = new ChromeDriver(new ChromeOptions().setHeadless(getCI()));
@@ -69,7 +70,7 @@ public class AppTest {
 		// Initialize eyes Configuration
 		Configuration config = new Configuration();
 
-		// You can get your api key from the Applitools dashboard
+		// You can get your api key from the Applitools dashboard and set as environment variable or GitHub secret
 		config.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
 
 		if (useGrid) {
@@ -91,6 +92,17 @@ public class AppTest {
 			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Local"));
 		}
 		
+		// Advanced Configuration properties -- see documentation for details
+		/* TODO - add and document this stuff
+					.setIgnoreDisplacements(true)
+					.setMatchLevel(MatchLevel.STRICT);
+					.setHideScrollbars(true)
+					fullscreen
+					wait before screenshots
+					send dom
+					use dom
+					root cause analysis
+					*/
 		// Set the configuration object to eyes
 		eyes.setConfiguration(config);
 
