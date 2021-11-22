@@ -26,13 +26,14 @@ public class AppTest {
 	public static void main(String[] args) {
 		// BaseURL of the website
 		String baseURL = "https://demo.applitools.com";
+		//String baseURL = "https://demo.applitools.com/index_v2.html";
 		
 		// ⭐️ Note to see visual bugs, run the test using the above URL for the 1st run.
 		// but then change the above URL to https://demo.applitools.com/index_v2.html
 		// (for the 2nd run)
 		
 		// Use or not-use the Ultrafast Grid
-		boolean useGrid = true;
+		boolean useGrid = false;
 
 		// Create a new chrome web driver
 		WebDriver webDriver = new ChromeDriver(new ChromeOptions().setHeadless(getCI()));
