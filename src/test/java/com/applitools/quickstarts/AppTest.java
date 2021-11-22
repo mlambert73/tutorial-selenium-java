@@ -1,15 +1,18 @@
 package com.applitools.quickstarts;
 
-import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.RectangleSize;
-import com.applitools.eyes.TestResultsSummary;
-import com.applitools.eyes.selenium.BrowserType;
-import com.applitools.eyes.selenium.Configuration;
-import com.applitools.eyes.selenium.Eyes;
+import com.applitools.eyes.*;
+//import com.applitools.eyes.BatchInfo;
+//import com.applitools.eyes.RectangleSize;
+//import com.applitools.eyes.TestResultsSummary;
+import com.applitools.eyes.selenium.*;
+//import com.applitools.eyes.selenium.BrowserType;
+//import com.applitools.eyes.selenium.Configuration;
+//import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.selenium.fluent.Target;
-import com.applitools.eyes.visualgrid.model.DeviceName;
-import com.applitools.eyes.visualgrid.model.ScreenOrientation;
-import com.applitools.eyes.visualgrid.services.VisualGridRunner;
+import com.applitools.eyes.visualgrid.model.*;
+//import com.applitools.eyes.visualgrid.model.DeviceName;
+//import com.applitools.eyes.visualgrid.model.ScreenOrientation;
+//import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
