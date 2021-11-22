@@ -39,7 +39,7 @@ public class AppTest {
 		if (useGrid) {
 			// Create a runner with concurrency of 10
 			runner = new VisualGridRunner(10);
-		else {
+		} else {
 			runner = new ClassicRunner();
 		}
 			
@@ -82,8 +82,7 @@ public class AppTest {
 			// Add mobile emulation devices in Portrait mode
 			config.addDeviceEmulation(DeviceName.iPhone_X, ScreenOrientation.PORTRAIT);
 			config.addDeviceEmulation(DeviceName.Pixel_2, ScreenOrientation.PORTRAIT);
-		}
-		else {
+		} else {
 			// create a new batch info instance and set it to the configuration
 			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Local"));
 		}
