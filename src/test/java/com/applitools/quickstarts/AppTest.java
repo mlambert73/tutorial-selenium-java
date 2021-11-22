@@ -27,17 +27,25 @@ public class AppTest {
 		// ⭐️ Note to see visual bugs, run the test using the above URL for the 1st run.
 		// but then change the above URL to https://demo.applitools.com/index_v2.html
 		// (for the 2nd run)
+		
+		// Use or not-use the Ultrafast Grid
+		boolean useGrid = true;
 
 		// Create a new chrome web driver
 		WebDriver webDriver = new ChromeDriver(new ChromeOptions().setHeadless(getCI()));
 
-		// Create a runner with concurrency of 1
-		VisualGridRunner runner = new VisualGridRunner(10);
-
-		// Create Eyes object with the runner, meaning it'll be a Visual Grid eyes.
+		// Create Grid or Local (aka Classic) runner
+		EyesRunner runner = null;
+		if useGrid {
+			// Create a runner with concurrency of 10
+			runner = new VisualGridRunner(10);
+		else {
+			runner = new ClassicRunner();
+		}
+			
+		// Create Eyes object with the runner.
 		Eyes eyes = new Eyes(runner);
-
-		setUp(eyes, true); // setup to run on the Ultrafast Grid
+		setUp(eyes, useGrid); // setup Applitools Configuration
 
 		try {
 			simpleTest(baseURL, webDriver, eyes);
@@ -77,7 +85,7 @@ public class AppTest {
 		}
 		else {
 			// create a new batch info instance and set it to the configuration
-			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Ultrafast"));
+			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Local"));
 		}
 		
 		// Set the configuration object to eyes
@@ -93,7 +101,7 @@ public class AppTest {
 			webDriver.get(baseURL);
 
 			// Call Open on eyes to initialize a test session
-			eyes.open(webDriver, "Demo App - Selenium for Java - Ultrafast", "Smoke Test - Selenium for Java - Ultrafast", new RectangleSize(800, 600));
+			eyes.open(webDriver, "Demo App - Selenium for Java", "Smoke Test - Selenium for Java", new RectangleSize(800, 600));
 
 			// check the login page with fluent api, see more info here
 			// https://applitools.com/docs/topics/sdk/the-eyes-sdk-check-fluent-api.html
