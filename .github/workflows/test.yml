@@ -1,4 +1,4 @@
-name: CI
+name: ApplitoolsDemo
 
 on:
   push:
@@ -23,7 +23,8 @@ jobs:
       - name: Install dependencies
         run: mvn install
 
-      - name: Test code
+      - name: Run All Tests
         run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          BASEURL: https://demo.applitools.com
