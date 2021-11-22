@@ -36,7 +36,7 @@ public class AppTest {
 
 		// Create Grid or Local (aka Classic) runner
 		EyesRunner runner = null;
-		if useGrid {
+		if (useGrid) {
 			// Create a runner with concurrency of 10
 			runner = new VisualGridRunner(10);
 		else {
@@ -68,7 +68,7 @@ public class AppTest {
 		// You can get your api key from the Applitools dashboard
 		config.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
 
-		if (useGrid)
+		if (useGrid) {
 			// create a new batch info instance and set it to the configuration
 			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Ultrafast"));
 
@@ -121,7 +121,7 @@ public class AppTest {
 
 	}
 
-	private static void tearDown(WebDriver webDriver, VisualGridRunner runner) {
+	private static void tearDown(WebDriver webDriver, EyesRunner runner) {
 		// Close the browser
 		webDriver.quit();
 
