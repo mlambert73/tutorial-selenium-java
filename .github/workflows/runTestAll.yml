@@ -1,0 +1,50 @@
+name: Applitools - Run All
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use java ${{ matrix.java-version }}
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: 'adopt'
+
+      - name: Install dependencies
+        run: mvn install
+
+      - name: Run Local v1
+        run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
+        env:
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          BASEURL: https://demo.applitools.com
+          USE_GRID: false
+
+      - name: Run Local v2
+        run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
+        env:
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          BASEURL: https://demo.applitools.com/index_v2.html
+          USE_GRID: false
+
+      - name: Run Grid v1
+        run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
+        env:
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          BASEURL: https://demo.applitools.com
+          USE_GRID: true
+
+      - name: Run Grid v2
+        run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
+        env:
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          BASEURL: https://demo.applitools.com/index_v2.html
+          USE_GRID: true
+
+          

@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: mvn install
 
-      - name: RunTest
+      - name: Run Test
         run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
