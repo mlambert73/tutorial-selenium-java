@@ -38,7 +38,7 @@ public class AppTest {
 		boolean useGrid = false; //default to not using the Ultrafast Grid (override with env var)
 		String env = System.getenv("USE_GRID");
 		if (env != null) {
-			useGrid = return Boolean.parseBoolean(env);
+			useGrid = Boolean.parseBoolean(env);
 		}
 		
 		// Create a new chrome web driver
