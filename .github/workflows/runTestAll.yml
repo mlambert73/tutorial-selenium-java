@@ -27,6 +27,7 @@ jobs:
           USE_GRID: false
 
       - name: Run Local v2
+        if: always()
         run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
@@ -34,6 +35,7 @@ jobs:
           USE_GRID: false
 
       - name: Run Grid v1
+        if: always()
         run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
@@ -41,6 +43,7 @@ jobs:
           USE_GRID: true
 
       - name: Run Grid v2
+        if: always()
         run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
