@@ -24,18 +24,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class AppTest {
 
 	public static void main(String[] args) {
-		// BaseURL of the website
-		String baseURL = System.getenv("BASEURL");
-		if (baseURL == null) {
-			baseURL = "https://demo.applitools.com";
-			//baseURL = "https://demo.applitools.com/index_v2.html";
-			// ⭐️ Note to see visual bugs, run the test using the above URL for the 1st run.
-			// but then change the above URL to https://demo.applitools.com/index_v2.html
-			// (for the 2nd run)
-		}
-		
-		// Use or not-use the Ultrafast Grid
-		boolean useGrid = false; //default to not using the Ultrafast Grid (override with env var)
+		// ⭐️ Note you can control if you want to use the Ultrafast Grid or run locally 
+		// by setting the environment variable 'USE_GRID' or switching the code below
+		boolean useGrid = false; // Not using the Ultrafast Grid
+		//boolean useGrid = true; // Using the Ultrafast Grid
 		String env = System.getenv("USE_GRID");
 		if (env != null) {
 			useGrid = Boolean.parseBoolean(env);
@@ -58,7 +50,7 @@ public class AppTest {
 		setUp(eyes, useGrid); // setup Applitools Configuration
 
 		try {
-			simpleTest(baseURL, webDriver, eyes);
+			simpleTest(webDriver, eyes);
 		} finally {
 			tearDown(webDriver, runner);
 		}
@@ -80,7 +72,7 @@ public class AppTest {
 
 		if (useGrid) {
 			// create a new batch info instance and set it to the configuration
-			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Ultrafast"));
+			config.setBatch(new BatchInfo("Ultrafast Batch - Selenium for Java"));
 
 			// Add browsers with different viewports
 			config.addBrowser(800, 600, BrowserType.CHROME);
@@ -94,7 +86,7 @@ public class AppTest {
 			config.addDeviceEmulation(DeviceName.Pixel_2, ScreenOrientation.PORTRAIT);
 		} else {
 			// create a new batch info instance and set it to the configuration
-			config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Local"));
+			config.setBatch(new BatchInfo("Local Batch - Selenium for Java"));
 		}
 		
 		// Advanced Configuration properties -- see documentation for details
@@ -107,15 +99,27 @@ public class AppTest {
 					send dom
 					use dom
 					root cause analysis
+					coded regions
 					*/
 		// Set the configuration object to eyes
 		eyes.setConfiguration(config);
 
 	}
 
-	public static void simpleTest(String baseURL, WebDriver webDriver, Eyes eyes) {
+	public static void simpleTest(WebDriver webDriver, Eyes eyes) {
 
 		try {
+
+			// ⭐️ Note to see visual bugs, run the test against two different versions of the website.
+			//   version 1: https://demo.applitools.com
+			//   version 2: https://demo.applitools.com/index_v2.html
+			// you can control the base URL by setting the environment variable 'BASEURL' 
+			// or switching the URL used in the code below
+			String baseURL = System.getenv("BASEURL");
+			if (baseURL == null) {
+				baseURL = "https://demo.applitools.com";
+				//baseURL = "https://demo.applitools.com/index_v2.html";
+			}
 
 			// Navigate to the url we want to test
 			webDriver.get(baseURL);
