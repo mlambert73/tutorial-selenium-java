@@ -1,4 +1,4 @@
-name: Applitools - Run Local v1
+name: Applitools - Run Local v2
 
 on:
   workflow_dispatch:
@@ -23,5 +23,5 @@ jobs:
         run: mvn exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-          BASEURL: https://demo.applitools.com
+          BASEURL: https://demo.applitools.com/index_v2.html
           USE_GRID: false
